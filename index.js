@@ -3,10 +3,13 @@ const axios = require("axios");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
+const { configDotenv } = require("dotenv");
 
+configDotenv.apply();
 const app = express();
-const PORT = 3000;
 
+const PORT = process.env.PORT;
+const connectionString = process.env.CONNECTION_STRING;
 app.use(cors());
 app.get("/api/tickers", async (req, res) => {
   try {
@@ -19,19 +22,16 @@ app.get("/api/tickers", async (req, res) => {
 });
 
 mongoose
-  .connect(
-    "mongodb+srv://admin:admin@cluster0.l5whg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect(connectionString)
   .then(() => {
     console.log("Database connected");
+    app.listen(PORT, () => {
+      console.log(`Server running on https://localhost:${PORT}`);
+    });
   })
   .catch((e) => {
     console.log(e);
   });
-
-app.listen(PORT, () => {
-  console.log(`app running on https://localhost:${PORT}`);
-});
 
 app.use(express.static(path.join(__dirname, "/")));
 
