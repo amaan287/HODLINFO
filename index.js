@@ -1,6 +1,8 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
+const mongoose = require("mongoose");
+const path = require("path");
 
 const app = express();
 const PORT = 3000;
@@ -16,6 +18,23 @@ app.get("/api/tickers", async (req, res) => {
   }
 });
 
+mongoose
+  .connect(
+    "mongodb+srv://admin:admin@cluster0.l5whg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  )
+  .then(() => {
+    console.log("Database connected");
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`app running on https://localhost:${PORT}`);
+});
+
+app.use(express.static(path.join(__dirname, "/")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });

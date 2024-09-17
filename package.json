@@ -3,13 +3,16 @@
     "axios": "^1.7.7",
     "cors": "^2.8.5",
     "express": "^4.21.0",
+    "mongodb": "^6.9.0",
     "mongoose": "^8.6.2",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7"
   },
   "name": "new-folder",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
+    "build": "npm install",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
