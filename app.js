@@ -1,8 +1,11 @@
+const dotenv = require("dotenv");
+dotenv.config();
+const port = process.env.PORT;
 document.addEventListener("DOMContentLoaded", async () => {
   const tableRows = document.getElementById("tableRows");
 
   try {
-    const response = await fetch("http://localhost:3000/api/tickers");
+    const response = await fetch(`http://localhost:${port}/api/tickers`);
     const data = await response.json();
 
     tableRows.innerHTML = data
