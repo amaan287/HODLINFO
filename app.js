@@ -1,6 +1,4 @@
-const dotenv = require("dotenv");
-dotenv.config();
-const port = process.env.PORT;
+const port = 3003;
 document.addEventListener("DOMContentLoaded", async () => {
   const tableRows = document.getElementById("tableRows");
 

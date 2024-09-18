@@ -28,9 +28,9 @@ app.use(cors()); // Enable CORS to allow frontend requests
 app.get("/api/fetch-tickers", async (req, res) => {
   try {
     const response = await axios.get("https://api.wazirx.com/api/v2/tickers");
-    const data = Object.values(response.data).filter(
-      (ticker) => ticker.quote_unit === "inr"
-    );
+    const data = Object.values(response.data)
+      .slice(0, 10)
+      .filter((ticker) => ticker.quote_unit === "inr");
 
     // Save each ticker to the database
     const savedTickers = await Ticker.insertMany(data);
