@@ -5,11 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("http://localhost:3000/api/tickers");
     const data = await response.json();
 
-    const tickers = Object.values(data).filter(
-      (ticker) => ticker.quote_unit === "inr"
-    );
-
-    tableRows.innerHTML = tickers
+    tableRows.innerHTML = data
       .map(
         (ticker, index) => `
           <tr>
