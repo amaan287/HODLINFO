@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Ticker = require("./model");
 const dotenv = require("dotenv");
-
+const path = require("path");
 dotenv.config();
 const connectionString = process.env.CONNECTION_STRING;
 const PORT = process.env.PORt;
@@ -50,4 +50,10 @@ app.get("/api/tickers", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch data from database" });
   }
+});
+
+app.use(express.static(path.join(__dirname, "/")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
